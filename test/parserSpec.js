@@ -118,6 +118,52 @@ define(['jquery', 'underscore', 'parser'], function($, _, Parser) {
             expect(obj).toEqual(expectedObj);
         });
 
+        it('should change JS object key to lowercase except Select type with Values that is object (Parser.toLower)', function() {
+            var obj = {
+                "Action": "test/url",
+                "Validation": {
+                    "FieldName1": {
+                        "required": true,
+                    },
+                    "FieldName2": {
+                        "required": true,
+                    }
+                },
+                "Fields": [{
+                    "Name": "Select",
+                    "Type": "Select",
+                    "Values": {
+                        "Option 1 Key": "Option 1",
+                        "Option 2 Key": "Option 2"
+                    },
+                    "Description": "Select"
+                }]
+            }, expectedObj = {
+                    "action": "test/url",
+                    "validation": {
+                        "FieldName1": {
+                            "required": true,
+                        },
+                        "FieldName2": {
+                            "required": true,
+                        }
+                    },
+                    "fields": [{
+                        "name": "Select",
+                        "type": "select",
+                        "values": {
+                            "Option 1 Key": "Option 1",
+                            "Option 2 Key": "Option 2"
+                        },
+                        "description": "Select"
+                    }]
+                };
+
+            Parser.toLower(obj);
+
+            expect(obj).toEqual(expectedObj);
+        });
+
     });
 
 });

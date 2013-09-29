@@ -31,14 +31,14 @@ define(['jquery', 'underscore'], function($, _) {
                         _keyLowerCase = key;
                     }
                 }
-                if (typeof obj[_keyLowerCase] === 'object' && _keyLowerCase !== 'validation') {
+                if (typeof obj[_keyLowerCase] === 'object' && !(_keyLowerCase === 'validation' || _keyLowerCase === 'values')) {
                     if (_.indexOf(_skipKeyLower, _keyLowerCase) === -1) {
                         that.toLower(obj[_keyLowerCase], skipKey);
                     }
                 }
                 if (_keyLowerCase === 'type') {
                     obj[_keyLowerCase] = obj[_keyLowerCase].toLowerCase();
-                    switch(obj[_keyLowerCase]) {
+                    switch (obj[_keyLowerCase]) {
                         case 'textbox':
                             obj[_keyLowerCase] = 'text';
                             break;

@@ -67,6 +67,26 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$el.html()).toEqual('<form id="formSchemaKitchenSink" name="formSchemaKitchenSink" class="form-render" method="post" novalidate=""><label for="Select">Select</label><select id="Select" name="Select"><option value="Option 1">Option 1</option><option value="Option 2">Option 2</option></select></form>');
         });
 
+        it('should render select with object values', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "Select",
+                    "Type": "Select",
+                    "Values": {
+                        "Option 1 Key": "Option 1",
+                        "Option 2 Key": "Option 2"
+                    },
+                    "Description": "Select"
+                }]
+            };
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$el.html()).toEqual('');
+        });
+
     });
 
 });
