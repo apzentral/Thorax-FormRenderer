@@ -36,6 +36,14 @@ define(['jquery', 'underscore'], function($, _) {
                         that.toLower(obj[_keyLowerCase], skipKey);
                     }
                 }
+                if (_keyLowerCase === 'type') {
+                    obj[_keyLowerCase] = obj[_keyLowerCase].toLowerCase();
+                    switch(obj[_keyLowerCase]) {
+                        case 'textbox':
+                            obj[_keyLowerCase] = 'text';
+                            break;
+                    }
+                }
             });
             return this;
         }

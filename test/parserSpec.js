@@ -1,8 +1,8 @@
-define(['parser', 'jquery', 'underscore'], function(Parser, $, _) {
+define(['jquery', 'underscore', 'parser'], function($, _, Parser) {
 
     describe('Parser Function', function() {
 
-        it('should change JS object key to lowercase', function() {
+        it('should change JS object key to lowercase (Parser.toLower)', function() {
             var obj = {
                 "Action": "test/url",
                 "Validation": {
@@ -40,14 +40,14 @@ define(['parser', 'jquery', 'underscore'], function(Parser, $, _) {
                     },
                     "fileds": [{
                         "name": "FieldName1",
-                        "type": "TextBox",
+                        "type": "text",
                         "description": "Text Box",
                         "options": {
                             "visibleon": "FieldName2"
                         }
                     }, {
                         "name": "FieldName2",
-                        "type": "FullName",
+                        "type": "fullname",
                         "description": "Full Name",
                         "options": {
                             "middlename": false
@@ -60,7 +60,7 @@ define(['parser', 'jquery', 'underscore'], function(Parser, $, _) {
             expect(obj).toEqual(expectedObj);
         });
 
-        it('should change JS object key to lowercase but with filter turn on', function() {
+        it('should change JS object key to lowercase but with filter turn on (Parser.toLower)', function() {
             var obj = {
                 "Action": "test/url",
                 "Validation": {
@@ -98,14 +98,14 @@ define(['parser', 'jquery', 'underscore'], function(Parser, $, _) {
                     },
                     "Fileds": [{
                         "name": "FieldName1",
-                        "type": "TextBox",
+                        "type": "text",
                         "description": "Text Box",
                         "options": {
                             "visibleon": "FieldName2"
                         }
                     }, {
                         "name": "FieldName2",
-                        "type": "FullName",
+                        "type": "fullname",
                         "description": "Full Name",
                         "options": {
                             "middlename": false
