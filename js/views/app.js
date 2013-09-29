@@ -45,11 +45,11 @@ define([
                 // Render Label
                 if (TemplatesLoader.isRenderLabel(element.type)) {
                     _htmlTemp = TemplatesLoader.getTemplate('label');
-                    that.$form.append(_htmlTemp(_data));
+                    that.$form.append(_htmlTemp(_data).replace(/(\r\n|\n|\r|\t)/gm, ''));
                 }
                 // Render Element
                 _htmlTemp = TemplatesLoader.getTemplate(element.type, _data);
-                that.$form.append(_htmlTemp(_data));
+                that.$form.append(_htmlTemp(_data).replace(/(\r\n|\n|\r|\t)/gm, ''));
             });
         }
 

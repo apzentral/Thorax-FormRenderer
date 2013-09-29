@@ -64,7 +64,7 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$el.html()).toEqual('');
+            expect(app.$el.html()).toEqual('<form id="formSchemaKitchenSink" name="formSchemaKitchenSink" class="form-render" method="post" novalidate=""><label for="Select">Select</label><select id="Select" name="Select"><option value="Option 1">Option 1</option><option value="Option 2">Option 2</option></select></form>');
         });
 
     });
