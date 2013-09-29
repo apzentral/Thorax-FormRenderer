@@ -1,24 +1,50 @@
 define(['jquery', 'underscore', 'backbone', 'thorax',
-    'text!templates/fields/default.handlebars'
-], function($, _, Backbone, Thorax, defaultTmpl) {
+    'text!templates/fields/label.handlebars',
+    'text!templates/fields/select.handlebars',
+    'text!templates/fields/default.handlebars',
+], function($, _, Backbone, Thorax, labelTmpl, selectTmpl, defaultTmpl) {
 
     /**
      * TemplatesLoader Class
      */
 
     var templateCaches = [],
+        notRenderLabel = ['button'],
         TemplatesLoader = {
 
-            loadTemplate: function(templateName) {
+            /**
+             * getTemplate will return the correct template to the view
+             * @param  {string} templateName
+             * @return {function}
+             */
+            getTemplate: function(templateName, data) {
+                data = data || null;
                 var _template;
                 switch (templateName) {
-                    default: templateName = 'default';
-                    _template = defaultTmpl;
+                    case 'select':
+                        if (!data.values || typeof data.values !== 'object') {
+                            throw 'Select requires to have Values property!';
+                        }
+                        if (data.values instanceof Array) {
+                            data.optionsIsArray = true;
+                        }
+                        _template = selectTmpl;
+                        break;
+                    case 'label':
+                        _template = labelTmpl;
+                        break;
+                    default:
+                        templateName = 'default';
+                        _template = defaultTmpl;
                 }
                 if (typeof templateCaches[templateName] === 'undefined') {
                     templateCaches[templateName] = Handlebars.compile(_template);
                 }
                 return templateCaches[templateName];
+            },
+
+            isRenderLabel: function(type) {
+                return (_.indexOf(notRenderLabel, type) === -1);
             }
 
         };

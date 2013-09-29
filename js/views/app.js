@@ -30,19 +30,26 @@ define([
             _.each(this.fields, function(element) {
                 element.attributes = element.attributes || {};
                 element.options = element.options || {};
-                var _htmlTemp, _id = {
-                        id: (element.attributes && element.attributes.id) ? element.attributes.id : ((element.name) ? element.name : ''),
-                        attr: ""
-                    };
+                var _htmlTemp, _data =
+                        _.extend({
+                            id: (element.attributes && element.attributes.id) ? element.attributes.id : ((element.name) ? element.name : ''),
+                            attr: ""
+                        }, element);
                 // Parse Attributes
                 _.each(element.attributes, function(value, key) {
-                    _id.attr += key.toLowerCase() + '=' + value + ' ';
+                    _data.attr += key.toLowerCase() + '=' + value + ' ';
                 });
                 if (typeof element.type === 'undefined') {
                     throw 'Fields requires to have Type property!';
                 }
-                _htmlTemp = TemplatesLoader.loadTemplate(element.type);
-                that.$form.append(_htmlTemp(_.extend(_id, element)));
+                // Render Label
+                if (TemplatesLoader.isRenderLabel(element.type)) {
+                    _htmlTemp = TemplatesLoader.getTemplate('label');
+                    that.$form.append(_htmlTemp(_data));
+                }
+                // Render Element
+                _htmlTemp = TemplatesLoader.getTemplate(element.type, _data);
+                that.$form.append(_htmlTemp(_data));
             });
         }
 
