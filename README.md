@@ -3,6 +3,11 @@ Thorax-FormRenderer
 
 FormRenderer using Thorax.
 
+### Test
+
+We are using [Karma](http://karma-runner.github.io/0.8/index.html) test runner for JavaScript.
+run with this command at the app root `karma start`
+
 ### Build
 
 run with this command at the app root `r.js -o js/lib/build.js`
