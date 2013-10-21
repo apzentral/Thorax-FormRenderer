@@ -145,6 +145,42 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
         });
 
+        it('should render fullname type with label', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "FullName",
+                    "Type": "FullName",
+                    "Description": "FullName"
+                }]
+            },
+                result = '<label for="FullName">FullName</label><div id="FullName-fullname" class="controls-row"><input id="FullName_fullname_first_name" name="FullName_fullname_first_name" type="text" class="span4 tolowercase toucwords" placeholder="First Name"><input id="FullName_fullname_middle_name" name="FullName_fullname_middle_name" type="text" class="span3 tolowercase toucwords" placeholder="Middle Initial"><input id="FullName_fullname_last_name" name="FullName_fullname_last_name" type="text" class="span5 tolowercase toucwords" placeholder="Last Name"></div>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+        });
+
+        it('should render fullname type with label without middle name', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "FullName",
+                    "Type": "FullName",
+                    "Description": "FullName",
+                    "Options": {
+                        "MiddleName": false
+                    }
+                }]
+            },
+                result = '<label for="FullName">FullName</label><div id="FullName-fullname" class="controls-row"><input id="FullName_fullname_first_name" name="FullName_fullname_first_name" type="text" class="span6 tolowercase toucwords" placeholder="First Name"><input id="FullName_fullname_last_name" name="FullName_fullname_last_name" type="text" class="span6 tolowercase toucwords" placeholder="Last Name"></div>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+        });
     });
 
 });

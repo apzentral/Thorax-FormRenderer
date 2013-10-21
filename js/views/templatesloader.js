@@ -1,9 +1,10 @@
 define(['jquery', 'underscore', 'backbone', 'thorax',
     'text!templates/fields/label.handlebars',
     'text!templates/fields/select.handlebars',
+    'text!templates/fields/fullname.handlebars',
     'text!templates/fields/number.handlebars',
     'text!templates/fields/default.handlebars',
-], function($, _, Backbone, Thorax, labelTmpl, selectTmpl, numberTmpl, defaultTmpl) {
+], function($, _, Backbone, Thorax, labelTmpl, selectTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
 
     /**
      * TemplatesLoader Class
@@ -22,6 +23,9 @@ define(['jquery', 'underscore', 'backbone', 'thorax',
                 data = data || null;
                 var _template;
                 switch (templateName) {
+                    case 'label':
+                        _template = labelTmpl;
+                        break;
                     case 'select':
                         if (!data.values || typeof data.values !== 'object') {
                             throw 'Select requires to have Values property!';
@@ -31,8 +35,11 @@ define(['jquery', 'underscore', 'backbone', 'thorax',
                         }
                         _template = selectTmpl;
                         break;
-                    case 'label':
-                        _template = labelTmpl;
+                    case 'fullname':
+                        _template = fullnameTmpl;
+                        if (typeof data.options.middlename === 'undefined') {
+                            data.options.middlename = true;
+                        }
                         break;
                     case 'number':
                         _template = numberTmpl;
