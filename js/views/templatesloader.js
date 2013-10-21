@@ -1,10 +1,11 @@
-define(['jquery', 'underscore', 'backbone', 'thorax',
+define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
     'text!templates/fields/label.handlebars',
+    'text!templates/fields/address.handlebars',
     'text!templates/fields/select.handlebars',
     'text!templates/fields/fullname.handlebars',
     'text!templates/fields/number.handlebars',
-    'text!templates/fields/default.handlebars',
-], function($, _, Backbone, Thorax, labelTmpl, selectTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
+    'text!templates/fields/default.handlebars'
+], function($, _, Backbone, Thorax, Common, labelTmpl, addressTmpl, selectTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
 
     /**
      * TemplatesLoader Class
@@ -25,6 +26,9 @@ define(['jquery', 'underscore', 'backbone', 'thorax',
                 switch (templateName) {
                     case 'label':
                         _template = labelTmpl;
+                        break;
+                    case 'address':
+                        _template = addressTmpl;
                         break;
                     case 'select':
                         if (!data.values || typeof data.values !== 'object') {
