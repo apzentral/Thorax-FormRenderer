@@ -1,8 +1,9 @@
 define(['jquery', 'underscore', 'backbone', 'thorax',
     'text!templates/fields/label.handlebars',
     'text!templates/fields/select.handlebars',
+    'text!templates/fields/number.handlebars',
     'text!templates/fields/default.handlebars',
-], function($, _, Backbone, Thorax, labelTmpl, selectTmpl, defaultTmpl) {
+], function($, _, Backbone, Thorax, labelTmpl, selectTmpl, numberTmpl, defaultTmpl) {
 
     /**
      * TemplatesLoader Class
@@ -32,6 +33,9 @@ define(['jquery', 'underscore', 'backbone', 'thorax',
                         break;
                     case 'label':
                         _template = labelTmpl;
+                        break;
+                    case 'number':
+                        _template = numberTmpl;
                         break;
                     default:
                         templateName = 'default';

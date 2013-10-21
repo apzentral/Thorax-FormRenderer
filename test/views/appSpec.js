@@ -92,6 +92,59 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
         });
 
+        it('should render number type with label', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "Number",
+                    "Type": "Number",
+                    "Description": "Number"
+                }]
+            },
+                result = '<label for="Number">Number</label><input id="Number" name="Number" type="number">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+        });
+
+        it('should render number type with label using spinner view', function() {
+            // We are using FuelUX for Spinner
+            // http://exacttarget.github.io/fuelux/#spinner
+            //
+            /* Example Mark Up
+            <div id="MySpinner" class="spinner">
+				<input type="text" class="input-mini spinner-input">
+					<div class="spinner-buttons btn-group btn-group-vertical">
+						<button type="button" class="btn spinner-up">
+							<i class="icon-chevron-up"></i>
+						</button>
+						<button type="button" class="btn spinner-down">
+							<i class="icon-chevron-down"></i>
+						</button>
+				</div>
+			</div>
+             */
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "Spinner",
+                    "Type": "Number",
+                    "Description": "Spinner",
+                    "Options": {
+                        "Spinner": true
+                    }
+                }]
+            },
+                result = '<label for="Spinner">Spinner</label><div id="Spinner-spinner" class="spinner"><input id="Spinner" name="Spinner" type="number" class="input-mini spinner-input"><div class="spinner-buttons btn-group btn-group-vertical"><button type="button" class="btn spinner-up"><i class="icon-chevron-up"></i></button><button type="button" class="btn spinner-down"><i class="icon-chevron-down"></i></button></div></div>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+        });
+
     });
 
 });
