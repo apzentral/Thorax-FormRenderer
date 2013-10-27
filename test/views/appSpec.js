@@ -332,7 +332,7 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputHiddenInput);
 
             // Check Container
-            $('div.controls-row.emailpicker').empty();
+            app.$('div.controls-row.emailpicker').empty();
             expect(app.$('div.YourEmail-wrapper').html()).toContain(resultContainer);
         });
 
