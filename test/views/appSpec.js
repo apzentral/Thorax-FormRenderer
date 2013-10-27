@@ -1,7 +1,24 @@
+/**
+ * Note: HTML naming convention will be
+ * 1. id
+ * 2. name
+ * 3. type
+ * 4. class
+ * 5. placeholder
+ * 6. style
+ * 7. other attributes
+ */
 define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Parser) {
 
+    /**
+     * Test to check normal HTML Mark Up
+     */
     describe('Check Form Markup', function() {
 
+
+        /**
+         * Test Form Markup
+         */
         it('should run with simple form markup', function() {
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -32,6 +49,10 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$el.html()).toEqual(result);
         });
 
+
+        /**
+         * Test TextBox Markup
+         */
         it('should run with simple textbox field markup with attributes', function() {
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -50,9 +71,13 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.TextBox-wrapper').html()).toEqual(result);
         });
 
+
+        /**
+         * Test Select Markup
+         */
         it('should render select with array values', function() {
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -68,8 +93,9 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.Select-wrapper').html()).toEqual(result);
         });
+
 
         it('should render select with object values', function() {
             var formRender = {
@@ -89,9 +115,13 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.Select-wrapper').html()).toEqual(result);
         });
 
+
+        /**
+         * Test Number Markup
+         */
         it('should render number type with label', function() {
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -106,8 +136,9 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.Number-wrapper').html()).toEqual(result);
         });
+
 
         it('should render number type with label using spinner view', function() {
             // We are using FuelUX for Spinner
@@ -115,16 +146,16 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             //
             /* Example Mark Up
             <div id="MySpinner" class="spinner">
-				<input type="text" class="input-mini spinner-input">
-					<div class="spinner-buttons btn-group btn-group-vertical">
-						<button type="button" class="btn spinner-up">
-							<i class="icon-chevron-up"></i>
-						</button>
-						<button type="button" class="btn spinner-down">
-							<i class="icon-chevron-down"></i>
-						</button>
-				</div>
-			</div>
+                <input type="text" class="input-mini spinner-input">
+                    <div class="spinner-buttons btn-group btn-group-vertical">
+                        <button type="button" class="btn spinner-up">
+                            <i class="icon-chevron-up"></i>
+                        </button>
+                        <button type="button" class="btn spinner-down">
+                            <i class="icon-chevron-down"></i>
+                        </button>
+                </div>
+            </div>
              */
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -142,9 +173,13 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.Spinner-wrapper').html()).toEqual(result);
         });
 
+
+        /**
+         * Test FullName Markup
+         */
         it('should render fullname type with label', function() {
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -159,8 +194,9 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.FullName-wrapper').html()).toEqual(result);
         });
+
 
         it('should render fullname type with label without middle name', function() {
             var formRender = {
@@ -179,9 +215,13 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             Parser.toLower(formRender);
 
             var app = new App(formRender);
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.FullName-wrapper').html()).toEqual(result);
         });
 
+
+        /**
+         * Test Address Markup
+         */
         it('should render address type with label', function() {
             var formRender = {
                 "Name": "formSchemaKitchenSink",
@@ -205,7 +245,95 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$('.address-city-state').html()).toEqual(resultCityState);
             expect(app.$('.address-zip').html()).toEqual(resultZip);
             app.$('#Address-address').empty();
-            expect(app.$('#formSchemaKitchenSink').html()).toEqual(result);
+            expect(app.$('div.Address-wrapper').html()).toEqual(result);
+        });
+
+
+        /**
+         * Test Email Markup
+         */
+        it('should render email type with label', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "YourEmail",
+                    "Type": "Email",
+                    "Description": "Your Email"
+                }]
+            },
+                resultLabel = '<label for="YourEmail">Your Email</label>',
+                resultInput = '<input id="YourEmail" name="YourEmail" type="email">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultLabel);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInput);
+        });
+
+        it('should render email type with label and Options AutoComplete to false', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "YourEmail",
+                    "Type": "Email",
+                    "Description": "Your Email",
+                    "Options": {
+                        "AutoComplete": false
+                    }
+                }]
+            },
+                resultLabel = '<label for="YourEmail">Your Email</label>',
+                resultInput = '<input id="YourEmail" name="YourEmail" type="email">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultLabel);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInput);
+        });
+
+        it('should render email type with label and Options AutoComplete to true', function() {
+            /* - Example Markup
+                <label for="YourEmail">Your Email</label>
+                <div class="controls-row emailpicker">
+                    <input id="YourEmail_username" name="YourEmail_username" type="text" class="not-sending emailpicker-username tolowercase" placeholder="username" style="width: 45%;">
+                    <span class="add-on">@</span>
+                    <input id="YourEmail_server" name="YourEmail_server" type="text" class="not-sending emailpicker-server tolowercase" placeholder="example.com" style="width:45%;" autocomplete="off" data-provide="typeahead">
+                    <input id="YourEmail" name="YourEmail" type="hidden" class="tolowercase" value="">
+                </div>
+             */
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "YourEmail",
+                    "Type": "Email",
+                    "Description": "Your Email",
+                    "Options": {
+                        "AutoComplete": true
+                    }
+                }]
+            },
+                resultContainer = '<div class="controls-row emailpicker"></div>',
+                resultLabel = '<label for="YourEmail">Your Email</label>',
+                resultInputUsername = '<input id="YourEmail_username" name="YourEmail_username" type="text" class="not-sending emailpicker-username tolowercase" placeholder="username" style="width: 45%;">',
+                resultInputSpan = '<span class="add-on">@</span>',
+                resultInputServer = '<input id="YourEmail_server" name="YourEmail_server" type="text" class="not-sending emailpicker-server tolowercase" placeholder="example.com" style="width:45%;" autocomplete="off" data-provide="typeahead">',
+                resultInputHiddenInput = '<input id="YourEmail" name="YourEmail" type="hidden" class="tolowercase" value="">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            // Check each elements
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultLabel);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputUsername);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputSpan);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputServer);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputHiddenInput);
+
+            // Check Container
+            $('div.controls-row.emailpicker').empty();
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultContainer);
         });
 
     });
