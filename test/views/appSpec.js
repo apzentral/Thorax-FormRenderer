@@ -336,6 +336,44 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$('div.YourEmail-wrapper').html()).toContain(resultContainer);
         });
 
+        it('should render email type with label and Options AutoComplete to true with Default as hotmail.com', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "YourEmail",
+                    "Type": "Email",
+                    "Description": "Your Email",
+                    "Options": {
+                        "AutoComplete": true,
+                        "Default": "hotmail.com"
+                    }
+                }]
+            },
+                resultContainer = '<div class="controls-row emailpicker"></div>',
+                resultLabel = '<label for="YourEmail">Your Email</label>',
+                resultInputUsername = '<input id="YourEmail_username" name="YourEmail_username" type="text" class="not-sending emailpicker-username tolowercase" placeholder="username" style="width: 45%;">',
+                resultInputSpan = '<span class="add-on">@</span>',
+                resultInputServer = '<input id="YourEmail_server" name="YourEmail_server" type="text" class="not-sending emailpicker-server tolowercase" placeholder="example.com" style="width:45%;" autocomplete="off" data-provide="typeahead" value="' + formRender.Fields[0].Options['Default'] + '">',
+                resultInputHiddenInput = '<input id="YourEmail" name="YourEmail" type="hidden" class="tolowercase" value="">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            // Check each elements
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultLabel);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputUsername);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputSpan);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputServer);
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultInputHiddenInput);
+
+            // Check the default of server val
+            expect(app.$('#YourEmail_server').val()).toEqual(formRender.fields[0].options['default']);
+
+            // Check Container
+            app.$('div.controls-row.emailpicker').empty();
+            expect(app.$('div.YourEmail-wrapper').html()).toContain(resultContainer);
+        });
+
     });
 
 });
