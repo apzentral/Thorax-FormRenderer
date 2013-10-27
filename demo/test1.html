@@ -84,6 +84,18 @@
     <script>
     var formSchema = {
         "Name": "formSchemaKitchenSink",
+        "Validation": {
+            "DateTestMax": {
+                "maxDate": "today"
+            },
+            "DateTestMin": {
+                "minDate": "08/05/2013"
+            },
+            "DateTestMaxMin": {
+                "minDate": "10/15/2013",
+                "maxDate": "today"
+            }
+        },
         "Fields": [{
             "Name": "TextBox",
             "Type": "TextBox",
@@ -92,6 +104,18 @@
             "Name": "DateTest",
             "Type": "Date",
             "Description": "Date input"
+        }, {
+            "Name": "DateTestMax",
+            "Type": "Date",
+            "Description": "Date input Max"
+        }, {
+            "Name": "DateTestMin",
+            "Type": "Date",
+            "Description": "Date input Min"
+        }, {
+            "Name": "DateTestMaxMin",
+            "Type": "Date",
+            "Description": "Date input Max Min"
         }]
     }
     </script>

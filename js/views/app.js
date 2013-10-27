@@ -26,6 +26,7 @@ define([
             if (this.name === 'app') {
                 throw 'formSchema.Name is not found.';
             }
+            this.validation = this.validation || {};
             this.render();
             this.$form = this.$el.find('form#' + this.name);
             var that = this;
@@ -33,6 +34,12 @@ define([
                 throw 'formSchema.Fields should be an array!';
             }
             _.each(this.fields, function(element) {
+                if (typeof element.name === 'undefined') {
+                    throw 'Fields requires to have Name property!';
+                }
+                if (typeof element.type === 'undefined') {
+                    throw 'Fields requires to have Type property!';
+                }
                 element.attributes = element.attributes || {};
                 element.options = element.options || {};
                 var _htmlTemp, _currentHtml,
@@ -43,13 +50,12 @@ define([
                     $currentHtml = $('<div>', {
                         'class': _data.id + '-wrapper'
                     });
+                // Merge Validation to Field
+                LibHelper.mergeValidationToField(_data, that.validation);
                 // Parse Attributes
                 _.each(element.attributes, function(value, key) {
                     _data.attr += key.toLowerCase() + '=' + value + ' ';
                 });
-                if (typeof element.type === 'undefined') {
-                    throw 'Fields requires to have Type property!';
-                }
                 // Render Label
                 if (TemplatesLoader.isRenderLabel(element.type)) {
                     _htmlTemp = TemplatesLoader.getTemplate('label');
