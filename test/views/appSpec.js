@@ -8,7 +8,11 @@
  * 6. style
  * 7. other attributes
  */
-define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Parser) {
+define(['jquery',
+    'underscore',
+    'views/app',
+    'parser'
+], function($, _, App, Parser) {
 
     /**
      * Test to check normal HTML Mark Up
@@ -374,6 +378,93 @@ define(['jquery', 'underscore', 'views/app', 'parser'], function($, _, App, Pars
             expect(app.$('div.YourEmail-wrapper').html()).toContain(resultContainer);
         });
 
+
+        /**
+         * Test File Markup
+         */
+        it('should render file type with label', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "TestFile",
+                    "Type": "File",
+                    "Description": "File to Upload"
+                }]
+            },
+                result = '<label for="TestFile">File to Upload</label><input id="TestFile" name="TestFile" type="file">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            // Check each elements
+            expect(app.$('div.TestFile-wrapper').html()).toEqual(result);
+        });
+
+        it('should render file type with label and attributes accept="image/*"', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "TestFile",
+                    "Type": "File",
+                    "Description": "File to Upload",
+                    "Attributes": {
+                        "accept": "image/*"
+                    }
+                }]
+            },
+                result = '<label for="TestFile">File to Upload</label><input id="TestFile" name="TestFile" type="file" accept="image/*">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            // Check each elements
+            expect(app.$('div.TestFile-wrapper').html()).toEqual(result);
+        });
+
+
+        /**
+         * Test Date Markup
+         */
+        it('should render date type with label', function() {
+            /* - Example Markup
+                <input type="date" class="datepicker" name="date" id="date">
+             */
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "TestDate",
+                    "Type": "Date",
+                    "Description": "This is a Date"
+                }]
+            },
+                result = '<label for="TestDate">This is a Date</label><input id="TestDate" name="TestDate" type="date">';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            // Check each elements
+            expect(app.$('div.TestDate-wrapper').html()).toEqual(result);
+        });
+
+        it('should render date type with label, will pop up the DatePicker when click', function() {
+            /* - Example Markup
+                <input type="date" class="datepicker" name="date" id="date">
+             */
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "TestDate",
+                    "Type": "Date",
+                    "Description": "This is a Date"
+                }]
+            };
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            // Check each elements
+            expect(app.$('div.TestDate-wrapper').html()).toContain(app.$('div.datepicker.dropdown-menu').html());
+        });
     });
 
 });

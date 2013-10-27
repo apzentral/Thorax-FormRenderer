@@ -7,8 +7,9 @@ define([
     'views/templatesloader',
     'text!templates/app.handlebars',
     'common',
-    'helper'
-], function($, _, Backbone, Thorax, Collection, TemplatesLoader, appTemplate, Common, Helper) {
+    'helper',
+    'lib-helper'
+], function($, _, Backbone, Thorax, Collection, TemplatesLoader, appTemplate, Common, Helper, LibHelper) {
 
     return Thorax.View.extend({
         // In a require.js application the name is primarily for
@@ -22,6 +23,9 @@ define([
 
         // Setup app view
         initialize: function() {
+            if (this.name === 'app') {
+                throw 'formSchema.Name is not found.';
+            }
             this.render();
             this.$form = this.$el.find('form#' + this.name);
             var that = this;
@@ -59,6 +63,8 @@ define([
                 $currentHtml.append(_currentHtml);
                 // Append jQuery Object to Form
                 that.$form.append($currentHtml);
+                // Attached JavaScripts to the field
+                LibHelper.attachedJavaScript(_data);
             });
         }
 
