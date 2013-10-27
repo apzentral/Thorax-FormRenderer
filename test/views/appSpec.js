@@ -463,7 +463,7 @@ define(['jquery',
 
             var app = new App(formRender);
             // Check each elements
-            expect(app.$('div.TestDate-wrapper').html()).toContain(app.$('div.datepicker.dropdown-menu').html());
+            expect($('body').html()).toContain($('div.datepicker.dropdown-menu').html());
         });
     });
 
