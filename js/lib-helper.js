@@ -6,8 +6,9 @@ define(['jquery',
     'datepicker'
 ], function($, _) {
 
-    function setDatePicker(field) {
-      $('#'+field.id).datepicker();
+    function setDatePicker($form, field) {
+      var $datepicker = $('#'+field.id, $form);
+      $datepicker.datepicker();
     }
 
     return {
@@ -17,13 +18,13 @@ define(['jquery',
          * @param  string str
          * @return string
          */
-        attachedJavaScript: function(field) {
+        attachedJavaScript: function($form, field) {
             if (!field.type) {
                 throw 'Function attachedJavaScript, expected Type in an object parameter.';
             }
             switch (field.type) {
               case 'date':
-                setDatePicker(field);
+                setDatePicker($form, field);
                 break;
             }
         }

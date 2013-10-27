@@ -52,9 +52,12 @@ require([
     // Parse Key to Lowercase
     Parser.toLower(formSchema);
 
+    if (!formSchema.el) {
+        formSchema.el = '#app-canvas';
+    }
+
     // Initialize the application view
     var view = new AppView(formSchema);
-    $('#app-canvas').html(view.$el.html());
 
     Backbone.history.start();
 

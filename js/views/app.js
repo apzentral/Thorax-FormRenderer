@@ -64,7 +64,7 @@ define([
                 // Append jQuery Object to Form
                 that.$form.append($currentHtml);
                 // Attached JavaScripts to the field
-                LibHelper.attachedJavaScript(_data);
+                LibHelper.attachedJavaScript(that.$form, _data);
             });
         }
 
