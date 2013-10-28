@@ -21,11 +21,11 @@ define(['jquery',
     }
 
     function setDatePicker($form, field) {
-        var $datepicker, _opts = {}, _dateParameter, _dateArray;
+        var $datepicker, _opts = {}, _dateParameterMin, _dateParameterMax, _dateArray;
         if (field.validation.maxDate && field.validation.minDate) {
             _opts.onRender = function(date) {
-                var _dateParameterMin = (field.validation.minDate === 'today') ? date.valueOf() : null,
-                    _dateParameterMax = (field.validation.maxDate === 'today') ? date.valueOf() : null;
+                _dateParameterMin = (field.validation.minDate === 'today') ? date.valueOf() : null;
+                _dateParameterMax = (field.validation.maxDate === 'today') ? date.valueOf() : null;
 
                 if (!_dateParameterMin) {
                     _dateArray = parseDateStringToArray(field.validation.minDate);
@@ -35,31 +35,32 @@ define(['jquery',
                     _dateArray = parseDateStringToArray(field.validation.maxDate);
                     _dateParameterMax = new Date(_dateArray[3], _dateArray[1] - 1, _dateArray[2]).valueOf();
                 }
+
                 return (date.valueOf() < _dateParameterMin || _dateParameterMax > now.valueOf()) ? 'disabled' : '';
             };
         } else if (field.validation.maxDate) {
             _opts.onRender = function(date) {
                 switch (field.validation.maxDate) {
                     case 'today':
-                        _dateParameter = date.valueOf();
+                        _dateParameterMax = date.valueOf();
                         break;
                     default:
                         _dateArray = parseDateStringToArray(field.validation.maxDate);
-                        _dateParameter = new Date(_dateArray[3], _dateArray[1] - 1, _dateArray[2]).valueOf();
+                        _dateParameterMax = new Date(_dateArray[3], _dateArray[1] - 1, _dateArray[2]).valueOf();
                 }
-                return _dateParameter > now.valueOf() ? 'disabled' : '';
+                return _dateParameterMax > now.valueOf() ? 'disabled' : '';
             };
         } else if (field.validation.minDate) {
             _opts.onRender = function(date) {
                 switch (field.validation.minDate) {
                     case 'today':
-                        _dateParameter = date.valueOf();
+                        _dateParameterMin = date.valueOf();
                         break;
                     default:
                         _dateArray = parseDateStringToArray(field.validation.minDate);
-                        _dateParameter = new Date(_dateArray[3], _dateArray[1] - 1, _dateArray[2]).valueOf();
+                        _dateParameterMin = new Date(_dateArray[3], _dateArray[1] - 1, _dateArray[2]).valueOf();
                 }
-                return date.valueOf() < _dateParameter ? 'disabled' : '';
+                return date.valueOf() < _dateParameterMin ? 'disabled' : '';
             };
         }
         $datepicker = $('#' + field.id, $form).datepicker(_opts)

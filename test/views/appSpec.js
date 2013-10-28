@@ -446,7 +446,7 @@ define(['jquery',
             expect(app.$('div.TestDate-wrapper').html()).toEqual(result);
         });
 
-        it('should render date type with label, will pop up the DatePicker when click', function() {
+        it('should render date type with label and datepicker markup', function() {
             /* - Example Markup
                 <input type="date" class="datepicker" name="date" id="date">
              */
@@ -465,6 +465,7 @@ define(['jquery',
             // Check each elements
             expect($('body').html()).toContain($('div.datepicker.dropdown-menu').html());
         });
+
     });
 
 });
