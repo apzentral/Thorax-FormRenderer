@@ -26,6 +26,12 @@ define([
             if (this.name === 'app') {
                 throw 'formSchema.Name is not found.';
             }
+            // Render Bootstrap version 2 or 3
+            if (!this.bootstrap) {
+                this.bootstrap = 2;
+            } else if (!(this.bootstrap === 2 || this.bootstrap === 3)) {
+                throw 'Bootstrap Option can only be version 2 or 3.';
+            }
             this.validation = this.validation || {};
             this.render();
             this.$form = this.$el.find('form#' + this.name);
@@ -61,12 +67,15 @@ define([
                     _htmlTemp = TemplatesLoader.getTemplate('label');
                     _currentHtml = Helper.removeWhiteSpace(_htmlTemp(_data));
                     $currentHtml.append(_currentHtml);
-                    //that.$form.append(_currentHtml);
                 }
                 // Render Element
                 _htmlTemp = TemplatesLoader.getTemplate(element.type, _data);
                 _currentHtml = Helper.removeWhiteSpace(_htmlTemp(_data));
                 $currentHtml.append(_currentHtml);
+
+                // Add Input Class for either bootstrap 2 or 3
+                Helper.addCssClassForInput($('#' + _data.id, $currentHtml), _data, that.bootstrap);
+
                 // Append jQuery Object to Form
                 that.$form.append($currentHtml);
                 // Attached JavaScripts to the field

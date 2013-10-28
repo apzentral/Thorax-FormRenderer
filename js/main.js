@@ -42,16 +42,17 @@ require([
     'parser'
 ], function(AppView, AppRouter, Parser) {
 
-    // Initialize routing and start Backbone.history()
-    new AppRouter();
-
     if (!formSchema) {
         throw 'In order to use FormRenderer, need to pass formSchema object.';
     }
 
+    // Initialize routing and start Backbone.history()
+    new AppRouter();
+
     // Parse Key to Lowercase
     Parser.toLower(formSchema);
 
+    // Default Form Render Markup
     if (!formSchema.el) {
         formSchema.el = '#app-canvas';
     }

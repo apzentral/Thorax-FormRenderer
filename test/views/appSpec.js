@@ -65,12 +65,12 @@ define(['jquery',
                     "Type": "TextBox",
                     "Description": "TextBox",
                     "Attributes": {
-                        "class": "span5",
+                        "class": "test",
                         "data-text": "test"
                     }
                 }]
             },
-                result = '<label for="TextBox">TextBox</label><input id="TextBox" name="TextBox" type="text" class="span5" data-text="test">';
+                result = '<label for="TextBox">TextBox</label><input id="TextBox" name="TextBox" type="text" class="test span12" data-text="test">';
 
             Parser.toLower(formRender);
 
@@ -92,7 +92,7 @@ define(['jquery',
                     "Description": "Select"
                 }]
             },
-                result = '<label for="Select">Select</label><select id="Select" name="Select"><option value="Option 1">Option 1</option><option value="Option 2">Option 2</option></select>';
+                result = '<label for="Select">Select</label><select id="Select" name="Select" class="span12"><option value="Option 1">Option 1</option><option value="Option 2">Option 2</option></select>';
 
             Parser.toLower(formRender);
 
@@ -114,7 +114,7 @@ define(['jquery',
                     "Description": "Select"
                 }]
             },
-                result = '<label for="Select">Select</label><select id="Select" name="Select"><option value="Option 1 Key">Option 1</option><option value="Option 2 Key">Option 2</option></select>';
+                result = '<label for="Select">Select</label><select id="Select" name="Select" class="span12"><option value="Option 1 Key">Option 1</option><option value="Option 2 Key">Option 2</option></select>';
 
             Parser.toLower(formRender);
 
@@ -135,7 +135,7 @@ define(['jquery',
                     "Description": "Number"
                 }]
             },
-                result = '<label for="Number">Number</label><input id="Number" name="Number" type="number">';
+                result = '<label for="Number">Number</label><input id="Number" name="Number" type="number" class="span12">';
 
             Parser.toLower(formRender);
 
@@ -156,7 +156,7 @@ define(['jquery',
                     "Description": "Textarea"
                 }]
             },
-                result = '<label for="Textarea">Textarea</label><textarea id="Textarea" name="Textarea"></textarea>';
+                result = '<label for="Textarea">Textarea</label><textarea id="Textarea" name="Textarea" class="span12"></textarea>';
 
             Parser.toLower(formRender);
 
@@ -286,7 +286,7 @@ define(['jquery',
                 }]
             },
                 resultLabel = '<label for="YourEmail">Your Email</label>',
-                resultInput = '<input id="YourEmail" name="YourEmail" type="email">';
+                resultInput = '<input id="YourEmail" name="YourEmail" type="email" class="span12">';
 
             Parser.toLower(formRender);
 
@@ -308,7 +308,7 @@ define(['jquery',
                 }]
             },
                 resultLabel = '<label for="YourEmail">Your Email</label>',
-                resultInput = '<input id="YourEmail" name="YourEmail" type="email">';
+                resultInput = '<input id="YourEmail" name="YourEmail" type="email" class="span12">';
 
             Parser.toLower(formRender);
 
@@ -411,7 +411,7 @@ define(['jquery',
                     "Description": "File to Upload"
                 }]
             },
-                result = '<label for="TestFile">File to Upload</label><input id="TestFile" name="TestFile" type="file">';
+                result = '<label for="TestFile">File to Upload</label><input id="TestFile" name="TestFile" type="file" class="span12">';
 
             Parser.toLower(formRender);
 
@@ -432,7 +432,7 @@ define(['jquery',
                     }
                 }]
             },
-                result = '<label for="TestFile">File to Upload</label><input id="TestFile" name="TestFile" type="file" accept="image/*">';
+                result = '<label for="TestFile">File to Upload</label><input id="TestFile" name="TestFile" type="file" accept="image/*" class="span12">';
 
             Parser.toLower(formRender);
 
@@ -457,7 +457,7 @@ define(['jquery',
                     "Description": "This is a Date"
                 }]
             },
-                result = '<label for="TestDate">This is a Date</label><input id="TestDate" name="TestDate" type="date">';
+                result = '<label for="TestDate">This is a Date</label><input id="TestDate" name="TestDate" type="date" class="span12">';
 
             Parser.toLower(formRender);
 
