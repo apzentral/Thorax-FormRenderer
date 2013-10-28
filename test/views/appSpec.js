@@ -144,6 +144,26 @@ define(['jquery',
         });
 
 
+        /**
+         * Test Textarea Markup
+         */
+        it('should render Textarea type with label', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "Textarea",
+                    "Type": "Textarea",
+                    "Description": "Textarea"
+                }]
+            },
+                result = '<label for="Textarea">Textarea</label><textarea id="Textarea" name="Textarea"></textarea>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('div.Textarea-wrapper').html()).toEqual(result);
+        });
+
         it('should render number type with label using spinner view', function() {
             // We are using FuelUX for Spinner
             // http://exacttarget.github.io/fuelux/#spinner

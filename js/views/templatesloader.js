@@ -3,10 +3,11 @@ define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
     'text!templates/fields/address.handlebars',
     'text!templates/fields/email.handlebars',
     'text!templates/fields/select.handlebars',
+    'text!templates/fields/textarea.handlebars',
     'text!templates/fields/fullname.handlebars',
     'text!templates/fields/number.handlebars',
     'text!templates/fields/default.handlebars'
-], function($, _, Backbone, Thorax, Common, labelTmpl, addressTmpl, emailTmpl, selectTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
+], function($, _, Backbone, Thorax, Common, labelTmpl, addressTmpl, emailTmpl, selectTmpl, textareaTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
 
     /**
      * TemplatesLoader Class
@@ -42,6 +43,9 @@ define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
                             data.optionsIsArray = true;
                         }
                         _template = selectTmpl;
+                        break;
+                    case 'textarea':
+                        _template = textareaTmpl;
                         break;
                     case 'fullname':
                         _template = fullnameTmpl;
