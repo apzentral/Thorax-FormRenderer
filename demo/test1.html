@@ -15,7 +15,7 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="../css/datepicker.css">
@@ -55,7 +55,7 @@
     window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.2.min.js"><\/script>')
     </script>
     <script src="../js/vendor/plugins.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
     <!-- Main RequireJS AMD -->
     <script data-main="../js/main" src="../js/lib/require/require.js"></script>
@@ -116,6 +116,39 @@
             "Name": "DateTestMaxMin",
             "Type": "Date",
             "Description": "Date input Max Min"
+        }, {
+            "Name": "FullName",
+            "Type": "FullName",
+            "Description": "Full Name"
+        }, {
+            "Name": "FullNameNoMiddle",
+            "Type": "FullName",
+            "Description": "First and Last Name",
+            "Options": {
+                "MiddleName": false
+            }
+        }, {
+            "Name": "FullNameWithMiddle",
+            "Type": "FullName",
+            "Description": "First, Middle and Last Name",
+            "Options": {
+                "MiddleName": true
+            }
+        }, {
+            "Name": "AddressField",
+            "Type": "Address",
+            "Description": "Address"
+        }, {
+            "Name": "Number",
+            "Type": "Number",
+            "Description": "Number"
+        }, {
+            "Name": "Spinner",
+            "Type": "Number",
+            "Description": "Spinner",
+            "Options": {
+                "Spinner": true
+            }
         }]
     }
     </script>
