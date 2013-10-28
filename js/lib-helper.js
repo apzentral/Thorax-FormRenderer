@@ -3,7 +3,8 @@
  */
 define(['jquery',
     'underscore',
-    'datepicker'
+    'datepicker',
+    'fuelux/spinner'
 ], function($, _) {
 
     var nowTemp = new Date(),
@@ -19,6 +20,13 @@ define(['jquery',
         var reggie = /(\d{2})\/(\d{2})\/(\d{4})/;
         return reggie.exec(str);
     }
+
+
+    /**
+     * Set DatePicker for Date Input
+     * @param {[type]} $form [description]
+     * @param {[type]} field [description]
+     */
 
     function setDatePicker($form, field) {
         var $datepicker, _opts = {}, _dateParameterMin, _dateParameterMax, _dateArray;
@@ -70,12 +78,18 @@ define(['jquery',
             .data('datepicker');
     }
 
+
+    function setFuelUXSpinner($form, field) {
+        $('#' + field.id).spinner();
+    }
+
     return {
 
         /**
          * If this field type need to activate JavaScript, will call here
-         * @param  string str
-         * @return string
+         * @param  object $form
+         * @param  object field
+         * @return
          */
         attachedJavaScript: function($form, field) {
             if (!field.type) {
@@ -85,9 +99,20 @@ define(['jquery',
                 case 'date':
                     setDatePicker($form, field);
                     break;
+                case 'number':
+                    if (field.options.spinner) {
+                        setFuelUXSpinner($form, field);
+                    }
+                    break;
             }
         },
 
+        /**
+         * Merge Validation to Field Object
+         * @param  object field
+         * @param  object validation
+         * @return
+         */
         mergeValidationToField: function(field, validation) {
             if (!field.name) {
                 throw 'Function mergeValidationToField, expected Name in a field parameter.';

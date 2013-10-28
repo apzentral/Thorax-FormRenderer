@@ -1,0 +1,15 @@
+/**
+ * Form Renderer Styles
+ */
+
+.form-render {
+
+	div[class$="-wrapper"] {
+		overflow: hidden;
+	}
+
+	select, textarea, input[type="file"] {
+		margin-bottom: 10px;
+	}
+
+}
