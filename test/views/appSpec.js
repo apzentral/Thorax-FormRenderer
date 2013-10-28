@@ -272,6 +272,25 @@ define(['jquery',
             expect(app.$('div.Address-wrapper').html()).toEqual(result);
         });
 
+        it('should render address type with label and without country', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "Address",
+                    "Type": "Address",
+                    "Description": "Address",
+                    "Options": {
+                        "HideCountry": true
+                    }
+                }]
+            };
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+            expect(app.$('.address-country').html()).toBeUndefined();
+        });
+
 
         /**
          * Test Email Markup
