@@ -14,6 +14,7 @@ define(['jquery',
     'parser'
 ], function($, _, App, Parser) {
 
+
     /**
      * Test to check normal HTML Mark Up
      */
@@ -503,6 +504,54 @@ define(['jquery',
             var app = new App(formRender);
             // Check each elements
             expect($('body').html()).toContain($('div.datepicker.dropdown-menu').html());
+        });
+
+
+        /**
+         * Test Button Markup
+         */
+        it('should render button with label', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "ButtonOne",
+                    "Type": "Button",
+                    "Description": "Button 1"
+                }]
+            }, result = '<button id="ButtonOne" name="ButtonOne" type="button" class="btn">Button 1</button>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+
+            // Check Element
+
+            // dump(app.$el.html());
+            // dump(app.$('.ButtonOne-wrapper').html());
+            // dump(formRender.fields[0].name);
+            // dump(app.$('.'+formRender.fields[0].name+'-wrapper').html());
+
+            expect(app.$('.' + formRender.fields[0].name + '-wrapper').html()).toContain(result);
+        });
+
+        it('should render button with label and class attribute', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "ButtonOne",
+                    "Type": "Button",
+                    "Description": "Button 1",
+                    "Attributes": {
+                        "class": "btn-primary button-class"
+                    }
+                }]
+            }, result = '<button id="ButtonOne" name="ButtonOne" type="button" class="btn-primary button-class btn">Button 1</button>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+
+            expect(app.$('.' + formRender.fields[0].name + '-wrapper').html()).toContain(result);
         });
 
     });

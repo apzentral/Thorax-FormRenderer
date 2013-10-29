@@ -3,7 +3,23 @@
  */
 define(['jquery', 'underscore'], function($, _) {
 
-    var notAddCssClassForInput = ['button', 'fullname', 'address', 'number'];
+    var notAddCssClassForInput = ['fullname', 'address', 'number'];
+
+    /**
+     * Adding Bootstrap Version Two in a current field
+     * @param object $input
+     * @param object field
+     */
+
+    function addBootstrapTwoClass($input, field) {
+        switch (field.type) {
+            case 'button':
+                $input.addClass('btn');
+                break;
+            default:
+                $input.addClass('span12');
+        }
+    }
 
     return {
 
@@ -19,6 +35,12 @@ define(['jquery', 'underscore'], function($, _) {
             return str.replace(/(\r\n|\n|\r|\t)/gm, '');
         },
 
+        /**
+         * Adding current CSS class for current input
+         * @param object $input
+         * @param object field
+         * @param integer bootstrapVersion
+         */
         addCssClassForInput: function($input, field, bootstrapVersion) {
             if (_.indexOf(notAddCssClassForInput, field.type) !== -1 || $input.attr('type') === 'hidden') {
                 if (field.type === 'number' && !field.options.spinner) {} else {
@@ -29,7 +51,7 @@ define(['jquery', 'underscore'], function($, _) {
                 case 3: // Version 2
                     break;
                 default: // Version 2
-                    $input.addClass('span12');
+                    addBootstrapTwoClass($input, field);
             }
         }
     };

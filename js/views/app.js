@@ -58,10 +58,12 @@ define([
                     });
                 // Merge Validation to Field
                 LibHelper.mergeValidationToField(_data, that.validation);
+
                 // Parse Attributes
                 _.each(element.attributes, function(value, key) {
-                    _data.attr += key.toLowerCase() + '=' + value + ' ';
+                    _data.attr += key.toLowerCase() + '="' + value + '" ';
                 });
+
                 // Render Label
                 if (TemplatesLoader.isRenderLabel(element.type)) {
                     _htmlTemp = TemplatesLoader.getTemplate('label');
