@@ -1,5 +1,6 @@
 define([], function() {
     return {
+        fieldNotRequireName: ['action'],
         countries: {
             "US": "United States",
             "AF": "Afghanistan",

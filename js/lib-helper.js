@@ -3,9 +3,10 @@
  */
 define(['jquery',
     'underscore',
+    'common',
     'datepicker',
     'fuelux/spinner'
-], function($, _) {
+], function($, _, Common) {
 
     var nowTemp = new Date(),
         now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
@@ -114,7 +115,9 @@ define(['jquery',
          * @return
          */
         mergeValidationToField: function(field, validation) {
-            if (!field.name) {
+            if ( _.indexOf(Common.fieldNotRequireName, field.type) !== -1 ) {
+                return;
+            } else if (!field.name) {
                 throw 'Function mergeValidationToField, expected Name in a field parameter.';
             }
             field.validation = (validation[field.name]) ? validation[field.name] : {};

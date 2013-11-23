@@ -554,6 +554,71 @@ define(['jquery',
             expect(app.$('.' + formRender.fields[0].name + '-wrapper').html()).toContain(result);
         });
 
+
+        /**
+         * Test Action Tag
+         */
+        it('should render Action container with correct class', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "ButtonOne",
+                    "Type": "Button",
+                    "Description": "Button 1",
+                    "Attributes": {
+                        "class": "btn-primary button-class"
+                    }
+                }, {
+                    "Type": "Action"
+                }]
+            }, result = '<div class="form-actions" id="form-render-actions"></div>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+
+            expect(app.$('.' + formRender.fields[1].type + '-wrapper').html()).toContain(result);
+        });
+
+        /**
+         * Test Button inside Action Div
+         */
+        it('should render Buttons in Action container with correct markup', function() {
+            var formRender = {
+                "Name": "formSchemaKitchenSink",
+                "Fields": [{
+                    "Name": "ButtonOne",
+                    "Type": "Button",
+                    "Description": "Button 1",
+                    "Attributes": {
+                        "class": "btn-primary button-class"
+                    }
+                }, {
+                    "Type": "Action"
+                }, {
+                    "Name": "ButtonTwo",
+                    "Type": "Button",
+                    "Description": "Button 2",
+                    "Attributes": {
+                        "class": "btn-primary button-class"
+                    }
+                }, {
+                    "Name": "ButtonThree",
+                    "Type": "Button",
+                    "Description": "Button 3",
+                    "Attributes": {
+                        "class": "btn-danger button-class"
+                    }
+                }]
+            }, result = '<div class="form-actions" id="form-render-actions"><div class="ButtonTwo-wrapper"><button id="ButtonTwo" name="ButtonTwo" type="button" class="btn-primary button-class btn">Button 2</button></div><div class="ButtonThree-wrapper"><button id="ButtonThree" name="ButtonThree" type="button" class="btn-danger button-class btn">Button 3</button></div></div>';
+
+            Parser.toLower(formRender);
+
+            var app = new App(formRender);
+
+            expect(app.$('.' + formRender.fields[1].type + '-wrapper').html()).toContain(result);
+        });
+
     });
 
 });

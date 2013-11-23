@@ -3,7 +3,7 @@
  */
 define(['jquery', 'underscore'], function($, _) {
 
-    var notAddCssClassForInput = ['fullname', 'address', 'number'];
+    var notAddCssClassForInput = ['fullname', 'address', 'number', 'action'];
 
     /**
      * Adding Bootstrap Version Two in a current field
@@ -48,7 +48,7 @@ define(['jquery', 'underscore'], function($, _) {
                 }
             }
             switch (bootstrapVersion) {
-                case 3: // Version 2
+                case 3: // Version 3
                     break;
                 default: // Version 2
                     addBootstrapTwoClass($input, field);

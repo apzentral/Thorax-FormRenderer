@@ -5,3 +5,8 @@
   overflow: hidden; }
 .form-render select, .form-render textarea, .form-render input[type="file"] {
   margin-bottom: 10px; }
+.form-render .action-wrapper .form-actions div[class*="-wrapper"] {
+  display: inline;
+  margin-right: 25px; }
+  .form-render .action-wrapper .form-actions div[class*="-wrapper"]:last-child {
+    margin-right: 0; }

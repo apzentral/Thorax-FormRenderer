@@ -1,0 +1,15 @@
+{{#if options.spinner}}
+	<div id="{{id}}-spinner" class="spinner">
+		<input id="{{id}}" name="{{name}}" type="{{type}}" class="input-mini spinner-input">
+		<div class="spinner-buttons btn-group btn-group-vertical">
+			<button type="button" class="btn spinner-up">
+				<i class="icon-chevron-up"></i>
+			</button>
+			<button type="button" class="btn spinner-down">
+				<i class="icon-chevron-down"></i>
+			</button>
+		</div>
+	</div>
+{{else}}
+	<input id="{{id}}" name="{{name}}" type="{{type}}" {{{attr}}}/>
+{{/if}}

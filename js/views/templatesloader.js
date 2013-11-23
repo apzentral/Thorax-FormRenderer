@@ -1,5 +1,6 @@
 define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
     'text!templates/fields/label.handlebars',
+    'text!templates/fields/action.handlebars',
     'text!templates/fields/button.handlebars',
     'text!templates/fields/address.handlebars',
     'text!templates/fields/email.handlebars',
@@ -8,14 +9,14 @@ define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
     'text!templates/fields/fullname.handlebars',
     'text!templates/fields/number.handlebars',
     'text!templates/fields/default.handlebars'
-], function($, _, Backbone, Thorax, Common, labelTmpl, buttonTmpl, addressTmpl, emailTmpl, selectTmpl, textareaTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
+], function($, _, Backbone, Thorax, Common, labelTmpl, actionTmpl, buttonTmpl, addressTmpl, emailTmpl, selectTmpl, textareaTmpl, fullnameTmpl, numberTmpl, defaultTmpl) {
 
     /**
      * TemplatesLoader Class
      */
 
     var templateCaches = [],
-        notRenderLabel = ['button'],
+        notRenderLabel = ['button', 'action'],
         TemplatesLoader = {
 
             /**
@@ -29,6 +30,9 @@ define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
                 switch (templateName) {
                     case 'label':
                         _template = labelTmpl;
+                        break;
+                    case 'action':
+                        _template = actionTmpl;
                         break;
                     case 'button':
                         _template = buttonTmpl;
@@ -70,6 +74,11 @@ define(['jquery', 'underscore', 'backbone', 'thorax', 'common',
                 return templateCaches[templateName];
             },
 
+            /**
+             * Check to see if this fields type need to render the label?
+             * @param  {String}  type
+             * @return {Boolean}
+             */
             isRenderLabel: function(type) {
                 return (_.indexOf(notRenderLabel, type) === -1);
             }

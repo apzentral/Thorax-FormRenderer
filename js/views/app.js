@@ -39,8 +39,15 @@ define([
             if (!(this.fields instanceof Array)) {
                 throw 'formSchema.Fields should be an array!';
             }
+
+            // Logic Flags
+            this.initViewLogicFlag();
+
             _.each(this.fields, function(element) {
-                if (typeof element.name === 'undefined') {
+
+                that.checkViewLogicFlag(element);
+
+                if (_.indexOf(Common.fieldNotRequireName, element.type) === -1 && typeof element.name === 'undefined') {
                     throw 'Fields requires to have Name property!';
                 }
                 if (typeof element.type === 'undefined') {
@@ -60,9 +67,11 @@ define([
                 LibHelper.mergeValidationToField(_data, that.validation);
 
                 // Parse Attributes
-                _.each(element.attributes, function(value, key) {
-                    _data.attr += key.toLowerCase() + '="' + value + '" ';
-                });
+                if (element.attributes) {
+                    _.each(element.attributes, function(value, key) {
+                        _data.attr += key.toLowerCase() + '="' + value + '" ';
+                    });
+                }
 
                 // Render Label
                 if (TemplatesLoader.isRenderLabel(element.type)) {
@@ -70,19 +79,64 @@ define([
                     _currentHtml = Helper.removeWhiteSpace(_htmlTemp(_data));
                     $currentHtml.append(_currentHtml);
                 }
+
                 // Render Element
                 _htmlTemp = TemplatesLoader.getTemplate(element.type, _data);
                 _currentHtml = Helper.removeWhiteSpace(_htmlTemp(_data));
-                $currentHtml.append(_currentHtml);
+
+                // Check to make sure to insert to correct location
+                that.injectHtmlMarkUp(element, $currentHtml, _currentHtml);
 
                 // Add Input Class for either bootstrap 2 or 3
-                Helper.addCssClassForInput($('#' + _data.id, $currentHtml), _data, that.bootstrap);
+                if (_data.id) {
+                    Helper.addCssClassForInput($('#' + _data.id, $currentHtml), _data, that.bootstrap);
+                } else {
+                    $currentHtml.removeClass('-wrapper').addClass(_data.type + '-wrapper');
+                }
 
-                // Append jQuery Object to Form
-                that.$form.append($currentHtml);
                 // Attached JavaScripts to the field
                 LibHelper.attachedJavaScript(that.$form, _data);
             });
+        },
+
+        /**
+         * Init Logic View Variables
+         * @return
+         */
+        initViewLogicFlag: function() {
+            this._renderButtonsInAction = false; // If Type "Action" is rendered, all other subsequence buttons will be render in Action container
+        },
+
+        /**
+         * Check Field Type and update logic view variables
+         * @param  {Object} field
+         * @return
+         */
+        checkViewLogicFlag: function(field) {
+
+            switch (field.type) {
+                case 'action':
+                    this._renderButtonsInAction = true;
+                    break;
+            }
+
+        },
+
+        injectHtmlMarkUp: function(field, $currentField, htmlString) {
+            var $renderElement;
+            switch (field.type) {
+                case 'button':
+                    if (this._renderButtonsInAction) {
+                        $renderElement = $('#form-render-actions', this.$el);
+                    }
+                    break;
+            }
+            $currentField.append(htmlString);
+            if ($renderElement) {
+                $currentField.appendTo($renderElement);
+            } else {
+                this.$form.append($currentField);
+            }
         }
 
     });

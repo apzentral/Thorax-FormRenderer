@@ -1,0 +1,10 @@
+{{#if options.autocomplete}}
+	<div class="controls-row emailpicker">
+		<input id="{{id}}_username" name="{{name}}_username" type="text" class="not-sending emailpicker-username tolowercase" placeholder="username" style="width: 45%;">
+        <span class="add-on">@</span>
+        <input id="{{id}}_server" name="{{name}}_server" type="text" class="not-sending emailpicker-server tolowercase" placeholder="example.com" style="width:45%;" autocomplete="off" data-provide="typeahead"{{#if options.default}} value="{{options.default}}"{{/if}}>
+        <input id="{{id}}" name="{{name}}" type="hidden" class="tolowercase" value="">
+	</div>
+{{else}}
+	<input id="{{id}}" name="{{name}}" type="{{type}}" {{{attr}}}/>
+{{/if}}

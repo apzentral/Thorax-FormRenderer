@@ -1,0 +1,11 @@
+<select id="{{id}}" name="{{name}}" {{{attr}}}>
+{{#if optionsIsArray}}
+	{{#each values}}
+		<option value="{{this}}">{{this}}</option>
+	{{/each}}
+{{else}}
+	{{#each values}}
+		<option value="{{@key}}">{{this}}</option>
+	{{/each}}
+{{/if}}
+</select>

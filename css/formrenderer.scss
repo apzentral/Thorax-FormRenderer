@@ -12,4 +12,21 @@
 		margin-bottom: 10px;
 	}
 
+	.action-wrapper {
+
+		.form-actions {
+
+			div[class*="-wrapper"] {
+				display: inline;
+				margin-right: 25px;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+			}
+
+		}
+
+	}
 }

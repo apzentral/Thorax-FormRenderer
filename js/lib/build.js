@@ -33,6 +33,8 @@
 	localstorage: 'lib/backbone/localstorage',
 	handlebars: 'lib/handlebars/handlebars.min',
 	thorax: 'lib/thorax/thorax',
-	text: 'lib/require/text'
+	fuelux: 'lib/fuelux',
+	text: 'lib/require/text',
+	datepicker: 'lib/helpers/bootstrap-datepicker'
   }
 })
