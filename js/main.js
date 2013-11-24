@@ -58,6 +58,11 @@ require([
         formSchema.el = '#app-canvas';
     }
 
+    // Default Language
+    if (!formSchema.language) {
+        formSchema.language = 'en';
+    }
+
     // Initialize the application view
     var view = new AppView(formSchema);
 

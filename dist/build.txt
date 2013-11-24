@@ -23,6 +23,7 @@ text!templates/fields/number.handlebars
 text!templates/fields/default.handlebars
 views/templatesloader.js
 text!templates/app.handlebars
+languages.js
 helper.js
 lib/helpers/bootstrap-datepicker.js
 lib/fuelux/spinner.js

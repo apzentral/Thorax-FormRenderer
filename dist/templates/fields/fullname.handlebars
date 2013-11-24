@@ -1,7 +1,7 @@
 <div id="{{id}}-fullname" class="controls-row">
-	<input id="{{id}}_fullname_first_name" name="{{id}}_fullname_first_name" type="text" class="span{{#if options.middlename}}4{{else}}6{{/if}} tolowercase toucwords" placeholder="First Name">
+	<input id="{{id}}_fullname_first_name" name="{{id}}_fullname_first_name" type="text" class="span{{#if options.middlename}}4{{else}}6{{/if}} tolowercase toucwords" placeholder="{{language.firstName}}">
 	{{#if options.middlename}}
-	<input id="{{id}}_fullname_middle_name" name="{{id}}_fullname_middle_name" type="text" class="span3 tolowercase toucwords" placeholder="Middle Initial">
+	<input id="{{id}}_fullname_middle_name" name="{{id}}_fullname_middle_name" type="text" class="span3 tolowercase toucwords" placeholder="{{language.middleInitial}}">
 	{{/if}}
-	<input id="{{id}}_fullname_last_name" name="{{id}}_fullname_last_name" type="text" class="span{{#if options.middlename}}5{{else}}6{{/if}} tolowercase toucwords" placeholder="Last Name">
+	<input id="{{id}}_fullname_last_name" name="{{id}}_fullname_last_name" type="text" class="span{{#if options.middlename}}5{{else}}6{{/if}} tolowercase toucwords" placeholder="{{language.lastName}}">
 </div>

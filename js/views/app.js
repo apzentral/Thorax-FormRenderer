@@ -7,9 +7,10 @@ define([
     'views/templatesloader',
     'text!templates/app.handlebars',
     'common',
+    'languages',
     'helper',
     'lib-helper'
-], function($, _, Backbone, Thorax, Collection, TemplatesLoader, appTemplate, Common, Helper, LibHelper) {
+], function($, _, Backbone, Thorax, Collection, TemplatesLoader, appTemplate, Common, Languages, Helper, LibHelper) {
 
     return Thorax.View.extend({
         // In a require.js application the name is primarily for
@@ -31,6 +32,10 @@ define([
                 this.bootstrap = 2;
             } else if (!(this.bootstrap === 2 || this.bootstrap === 3)) {
                 throw 'Bootstrap Option can only be version 2 or 3.';
+            }
+            // Check default language
+            if (!this.language) {
+                this.language = 'en';
             }
             this.validation = this.validation || {};
             this.render();
@@ -58,7 +63,8 @@ define([
                 var _htmlTemp, _currentHtml,
                     _data = _.extend({
                         id: (element.attributes && element.attributes.id) ? element.attributes.id : ((element.name) ? element.name : ''),
-                        attr: ""
+                        attr: "",
+                        language: Languages[that.language]
                     }, element),
                     $currentHtml = $('<div>', {
                         'class': _data.id + '-wrapper'
